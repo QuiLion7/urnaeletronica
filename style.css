@@ -1,0 +1,393 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+@keyframes pisca {
+    0% {opacity: 0.1;}
+    50% {opacity: 1;}
+    100% {opacity: 0.1;}
+}
+
+body {
+    background: linear-gradient(to right, #1449ac, #00fd8b);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 60px;
+    color: #FFFFFF;
+    text-align: center;
+    box-shadow: 0 0 10px #000000;
+    border-radius: 0 0 20px 20px;
+}
+section {
+    width: 100vw;
+    min-height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #c2bbab;
+    width: 80%;
+    height: 450px;
+    margin: 20px 0;
+    box-shadow: 0 0 10px #000000;
+    transition: 0.5s;
+}
+.container:hover {
+    box-shadow: 0 0 30px #000000;
+    transition: 0.5s; 
+}
+#noPermitido {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    transition: 1s;
+}
+#noPermitidoAviso {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1rem;
+    font-weight:100;
+    line-height: 25px;
+    color: #FFFFFF;
+    background-color: #000000;
+    width: 280px;
+    height: 160px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #000000;
+    padding: 20px;
+    position: relative;
+}
+#fechar {
+    background-color: #FF0000;
+    color: #FFFFFF;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 0 10px 0 10px;
+    position: absolute;
+    cursor: pointer;
+    right: 0;
+    top: 0;
+}
+#telaContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 100%;
+}
+#tela {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    height: 90%;
+    border: 2px solid #80817b;
+    background-image: linear-gradient(to right, #e9e9e9, #c0c0c0);
+}
+#fim {
+   width: 95%;
+    height: 90%;
+    border: 2px solid #80817b;
+    background-image: linear-gradient(to right, #e9e9e9, #c0c0c0);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 7rem;
+}
+#novoVoto {
+    background: linear-gradient(to top, #1449ac, #00fd8b);
+    align-items: center;
+    color: #FFFFFF;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+}
+#telaTop {
+    display: flex;
+    height: calc(100% - 70px);
+}
+#telaTopLeft {
+    width: 100%;
+    padding-left: 10px;
+    font-size: 0.9rem;
+}
+#seuVotoPara {
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+#cargoCandidato {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-size: 1.2rem;
+}
+#numeros {
+    display: flex;
+    align-items: center;
+    height: 70px;
+}
+#numeros span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    border: 1px solid #000000;
+    width: 50px;
+    height: 60px;
+    font-size: 2.5rem;
+}
+.piscar {
+    animation-name: pisca;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+#nomeCandidato {
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+#partido {
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+.aviso {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 60px;
+    font-size: 3rem;
+}
+#telaTopRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 90px;
+}
+#telaTopRight img {
+    width: inherit;
+}
+#telaTopRight span  {
+    background-color: #FFFFFF;
+    width: inherit;
+    text-align: center;
+}
+#telaBotton {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    border-top: 2px solid #000000;
+    font-size: 0.9rem;
+    padding-left: 10px;
+}
+#teclado {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 100%;
+    padding: 10px;
+    background-color: #4a4542;
+}
+#tecladoNumeros {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+}
+.button {
+    background-color: #363231;
+    color: #FFFFFF;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 80px;
+    height: 50px;
+    border: 1px solid #000000;
+}
+.button:hover {
+    border: 2px solid #000000;
+}
+.button0 {
+    grid-column: 2 / 3
+}
+#tecladoButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.buttonBranco, .buttonCorrige, .buttonConfirma {
+    width: 100px;
+    height: 50px;
+    border: 1px solid #000000;
+    cursor: pointer;
+}
+.buttonBranco:hover, .buttonCorrige:hover, .buttonConfirma:hover {
+    border: 2px solid #000000;
+}
+.buttonBranco {
+    background-color: #FFFFFF;
+}
+.buttonCorrige {
+    margin: 0 10px;
+    background-color: #f69850;
+}
+.buttonConfirma {
+    background-color: #43c474;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 60px;
+    color: #FFFFFF;
+    box-shadow: 0 0 10px #000000;
+    border-radius: 20px 20px 0 0;
+    font-size: 0.9rem;
+}
+footer div a {
+    text-decoration: none;
+    color: #FFFFFF;
+    transition: 0.5s;
+}
+footer div a:hover {
+    color:#000000;
+    transition: 0.5s;
+}
+#ref {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+}
+#ref p {
+    margin-right: 5px;
+}
+#banner--logos--footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+#banner--logos--footer a img {
+    width: 25px;
+    height: auto;
+    margin: 0 5px;
+    border-radius: 10px;
+    border: 2px solid #FFFFFF;
+    transition: 0.5s;
+}
+#banner--logos--footer a img:hover {
+    width: 35px;
+    filter: invert(100%);
+    transition: 0.5s;
+}
+
+@media (max-width:1025px) {
+    .container {
+        width: 95%;
+    }
+}
+@media (max-width:780px) {
+    .container {
+        height: 500px;
+    }
+    .button {
+        font-size: 2rem;
+        width: 60px;
+        height: 40px;
+    }
+    .buttonBranco, .buttonCorrige, .buttonConfirma {
+        width: 80px;
+        height: 40px;
+        font-size: 0.7rem;
+    }
+}
+@media (max-width:650px) {
+    header h1 {
+        font-size: 1.7rem;
+    }
+    .container {
+        flex-direction: column;
+        height: 700px;
+    }
+    #telaContainer {
+        width: 100%;
+        height: 70%;
+    }
+    #telaTopLeft {
+        font-size: 0.8rem;
+    }
+    #cargoCandidato {
+        font-size: 1rem;
+    }
+    #telaTopRight {
+        width: 70px;
+    }
+    #numeros span {
+        width: 45px;
+        height: 55px;
+        font-size: 2rem;
+    }
+    .aviso {
+        font-size: 1.7rem;
+    }
+    #teclado {
+        width: 100%;
+        height: 40%;
+    }
+    footer {
+        font-size: 0.75rem;
+    }
+    #banner--logos--footer a img {
+        width: 25px;
+
+    }
+    #banner--logos--footer a img:hover {
+        width: 40px;
+
+    }
+}

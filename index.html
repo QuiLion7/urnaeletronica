@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuiUrna Eletrônica</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>Urna Eletrônica</h1>
+    </header>
+    <section>
+      <div class="container">
+        <div id="noPermitido">
+          <div id="noPermitidoAviso">
+            Para votar em BRANCO o campo de voto deve estar vazio.<br>
+            Aperte CORRIGE para apagar o campo de voto.
+            <button id="fechar" onclick="fechar()">X</button>
+          </div>
+        </div>
+        <div id="telaContainer">
+          <div id="tela">
+            <div id="telaTop">
+              <div id="telaTopLeft">
+                <div id="seuVotoPara"><span>SEU VOTO PARA</span></div>
+                <div id="cargoCandidato">PREFEITO</div>
+                <div id="numeros">
+                  <span class="piscar"></span>
+                  <span class=""></span>
+                </div>
+                <div id="nomeCandidato"><span>Nome: Adrian</span></div>
+                <div id="partido"><span>Partido: PCrianças</span></div>
+                <div class="aviso"><span>VOTO NULO</span></div>
+              </div>
+              <div id="telaTopRight">
+                <img src="./images/quilion.jpg">
+                <span></span>
+              </div>
+            </div>
+            <div id="telaBotton"> 
+              Aperte a tecla:<br/>
+              CONFIRMA para CONFIRMAR este voto<br/>
+              CORRIGE para REINICIAR este voto
+            </div>
+          </div>
+          <div id="fim">
+            <span>FIM!</span>
+            <button id="novoVoto" onclick="novoVoto()">NOVO VOTO</button>   
+          </div>
+        </div>
+        <div id="teclado">
+          <div id="tecladoNumeros">
+            <button class="button" onclick="clicou(1)">1</button>
+            <button class="button" onclick="clicou(2)">2</button>
+            <button class="button" onclick="clicou(3)">3</button>
+            <button class="button" onclick="clicou(4)">4</button>
+            <button class="button" onclick="clicou(5)">5</button>
+            <button class="button" onclick="clicou(6)">6</button>
+            <button class="button" onclick="clicou(7)">7</button>
+            <button class="button" onclick="clicou(8)">8</button>
+            <button class="button" onclick="clicou(9)">9</button>
+            <button class="button button0" onclick="clicou(0)">0</button>
+          </div>
+          <div id="tecladoButtons">
+            <button class="buttonBranco" onclick="branco()">BRANCO</button>
+            <button class="buttonCorrige" onclick="corrige()">CORRIGE</button>
+            <button class="buttonConfirma" onclick="confirma()">CORNFIRMAR</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div id="ref">
+        <p>Codificado com muito entusiasmo por</p>
+        <a href="">Quilion Oliveira</a>
+      </div>
+      <div id="banner--logos--footer">
+        <a href="https://github.com/QuiLion7?tab=repositories" target="_blank">
+          <img src="./images/github.png" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/quilion-oliveira-18820b31/"
+          target="_blank"
+        >
+          <img src="./images/linkedin.png" />
+        </a>
+        <a href="mailto:quilbrub@gmail.com" target="_blank">
+          <img src="./images/gmail.png" />
+        </a>
+        <a href="https://www.instagram.com/quilion7/" target="_blank">
+          <img src="./images/instagram.png" />
+        </a>
+        <a href="https://www.facebook.com/QuiLion/" target="_blank">
+          <img src="./images/facebook.png" />
+        </a>
+      </div>
+    </footer>
+    <script src="./script.js"></script>
+  </body>
+</html>
