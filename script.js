@@ -13,6 +13,8 @@ let nomeImagemCandidato = c('#telaTopRight span');
 let legendaConfirmar = c('#telaBotton');
 let noPermitido = c('#noPermitido')
 
+
+let resultadoNaTela = c('footer div');
 //Cadastro de Informações Utilizadas
 let cadastroCandidatos = [
     {
@@ -25,6 +27,7 @@ let cadastroCandidatos = [
                 partido: 'DasCrianças',
                 foto:'adrian.jpg',
                 legenda: 'Adrian',
+                votado: 0
             },
             {
                 numero: '01',
@@ -38,7 +41,7 @@ let cadastroCandidatos = [
                 nome: 'Bruna Magalhães',
                 partido: 'DasGrávidas',
                 foto:'bruna.jpg', 
-                legenda: 'BrunaLinda',
+                legenda: 'Bruna Linda',
             },
             {
                 numero: '02',
@@ -73,7 +76,7 @@ let cadastroCandidatos = [
                 nome: 'Juscilane',
                 partido: 'DosQuiCaminham',
                 foto: 'juscilane.jpg', 
-                legenda: 'QuiCaminha',
+                legenda: 'Qui Caminha',
             },
             {
                 numero: '12',
@@ -101,13 +104,14 @@ let cadastroCandidatos = [
                 partido: 'DosProgramadores',
                 foto: 'quilion.jpg', 
                 legenda: 'QuiLindo',
+                votado: 0
             },
             {
                 numero: '1988',
                 nome: 'Bruna Magalhães',
                 partido: 'DasGrávidas',
                 foto:'bruna.jpg', 
-                legenda: 'BrunaLinda',
+                legenda: 'Bruna Linda',
             },
             {
                 numero: '1986',
@@ -142,7 +146,7 @@ let cadastroCandidatos = [
                 nome: 'Juscilane',
                 partido: 'DosQuiCaminham',
                 foto: 'juscilane.jpg', 
-                legenda: 'QuiCaminha',
+                legenda: 'Qui Caminha',
             },
             {
                 numero: '1965',
@@ -159,7 +163,23 @@ let cadastroCandidatos = [
 let etapaAtual = 0;
 let numeroclicado = '';
 let votoBranco = true;
-let votos = [];
+let votosLavador = [];
+let votosSecador = [];
+
+let testecontadorVotosSecador = [
+    {voto: '1994'},
+    {voto: '1994'},
+    {voto: '1989'},
+    {voto: 'Branco'},
+    {voto: '1234'}
+]
+let testecontadorVotosLavador = [
+    {voto: '08'},
+    {voto: '08'},
+    {voto: '01'},
+    {voto: 'Branco'},
+    {voto: '00'}
+];
 
 function comecandoEtapas() {
     let etapa = cadastroCandidatos[etapaAtual];
@@ -252,16 +272,19 @@ function confirma() {
     let votoConfirmado = false;
 
     if(votoBranco === true) {
-        votos.push({
-            etapa: cadastroCandidatos[etapaAtual].titulo,
-            voto: 'Branco'
-        });
+        if(cadastroCandidatos[etapaAtual].titulo === 'LAVADOR DE LOUÇA') {
+            votosLavador.push({voto: 'Branco'});
+        } else if(cadastroCandidatos[etapaAtual].titulo === 'SECADOR DE LOUÇA') {
+            votosSecador.push({voto: 'Branco'});
+        }
         votoConfirmado = true;
+        
     }else if(numeroclicado.length === etapa.qnumeros) {
-        votos.push({
-            etapa: cadastroCandidatos[etapaAtual].titulo,
-            voto: numeroclicado
-        });
+        if(cadastroCandidatos[etapaAtual].titulo === 'LAVADOR DE LOUÇA') {
+            votosLavador.push({voto: numeroclicado});
+        } else if(cadastroCandidatos[etapaAtual].titulo === 'SECADOR DE LOUÇA') {
+            votosSecador.push({voto: numeroclicado});
+        }
         votoConfirmado = true;
     }
 
@@ -274,7 +297,6 @@ function confirma() {
             let fim = c('#fim');
             tela.style.display = 'none';
             fim.style.display = 'flex';
-            console.log(votos);
         }
     }
 }
@@ -284,6 +306,59 @@ function novoVoto() {
     tela.style.display = 'flex';
     fim.style.display = 'none';
     comecandoEtapas() 
+}
+
+function qntVotos () { 
+   //Para saber quantos votos foram feitos
+   let qntVotosLav = 0;
+   let qntVotosSec = 0;
+   votos.map((item)=>{
+    if(item.etapa === 'LAVADOR DE LOUÇA') {
+        qntVotosLav++;
+    }else if(item.etapa === 'SECADOR DE LOUÇA') {
+        qntVotosSec++;
+    }
+   });
+   resultadoNaTela.innerHTML = `Etapa: LAVADOR DE LOUÇA <br> Quantidade de Votos: ${qntVotosLav}<br>Etapa: SECADOR DE LOUÇA <br> Quantidade de Votos: ${qntVotosSec}`;
+}
+
+function contadorResultado() {
+    let contandoVotosLavador = votosLavador.reduce((accumulator, { voto }) => {
+        accumulator[voto] = accumulator[voto] + 1 || 1
+        return accumulator
+    }, {})
+    let contandoVotosSecador = votosSecador.reduce((accumulator, { voto }) => {
+        accumulator[voto] = accumulator[voto] + 1 || 1
+        return accumulator
+    }, {})
+    console.log(contandoVotosLavador);
+    console.log(contandoVotosSecador);
+}
+
+function resultado() {
+    /*
+    Procurando com for
+    for(let i in testecontadorVotosLavador) {
+        if(testecontadorVotosLavador[i].voto === 'Branco'){
+            console.log('deu aqui')
+        }
+    }
+    */
+   // Procurando com filter
+    testecontadorVotosLavador.filter(item => {
+        if(item.voto === 'Branco') {
+            console.log('deu bom aqui')
+        }
+    })
+   
+
+    /*cadastroCandidatos.filter(item => {
+        item.candidatos.filter(item => {
+            console.log(item.numero)
+        })
+    })*/
+    console.log(testecontadorVotosLavador);
+    console.log(testecontadorVotosSecador);
 }
 
 comecandoEtapas() 
