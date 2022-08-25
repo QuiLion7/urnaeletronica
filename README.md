@@ -1,2 +1,8 @@
 # Urna Eletrônica
-Este Projetinho foi proposto no curso da B7Web e está sendo modificado para fixação de conhecimentos intermediários em Javascript;
+Projetinho Pessoal de Javascript Puro.
+
+O que aprendi ou fixei?
+- push(adicionar informações num object);
+- manipular dados de um object e mostrar no DOM;
+- filtrar informações (filter) e condicionar; 
+- A criação e alteração tiveram como objetivo a fixação de conhecimentos através da execução prática.
