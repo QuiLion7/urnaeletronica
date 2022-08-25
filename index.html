@@ -8,21 +8,30 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />  </head>
   <body>
     <header>
       <h1>Urna Eletrônica</h1>
     </header>
     <section>
+      <div id="containerCandidatos">
+        <div id="containerCandidatosTittle">
+          <span>CANDIDATOS DISPONÍVEIS</span>
+          <span class="buttonMostrarCandidatos" onclick="mostrandoCandidatos()">
+            <span class="material-symbols-outlined">expand_more</span>
+        </div>
+        <div id="containerMostrarCandidatos">
+          
+        </div>
+      </div>
       <div class="container">
         <div id="noPermitido">
           <div id="noPermitidoAviso">
-            Para votar em BRANCO o campo de voto deve estar vazio.<br>
-            Aperte CORRIGE para apagar o campo de voto.
+            <span>
+              Para votar em BRANCO o campo de voto deve estar vazio.<br>
+              Aperte CORRIGE para apagar o campo de voto.
+            </span>
             <button id="fechar" onclick="fechar()">X</button>
           </div>
         </div>
@@ -53,7 +62,10 @@
           </div>
           <div id="fim">
             <span>FIM!</span>
-            <button id="novoVoto" onclick="novoVoto()">NOVO VOTO</button>   
+            <div id="buttonsEnd">
+              <button id="novoVoto" onclick="novoVoto()">NOVO VOTO</button>
+              <button id="mostrarResultado" onclick="mostrarResultado()">RESULTADO</button>   
+            </div>
           </div>
         </div>
         <div id="teclado">
@@ -78,11 +90,7 @@
       </div>
     </section>
     <footer>
-      <button id="qntVotos" onclick="qntVotos()">QNT VOTOS</button>
-      <button id="resultado" onclick="resultado()">RESULTADO</button>
-      <div></div>
-      <!--
-<div id="ref">
+      <div id="ref">
         <p>Codificado com muito entusiasmo por</p>
         <a href="">Quilion Oliveira</a>
       </div>
@@ -106,8 +114,6 @@
           <img src="./images/facebook.png" />
         </a>
       </div>
-      -->
-      
     </footer>
     <script src="./script.js"></script>
   </body>

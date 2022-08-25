@@ -11,14 +11,18 @@ let aviso = c('.aviso span');
 let imagemCandidato = c('#telaTopRight');
 let nomeImagemCandidato = c('#telaTopRight span');
 let legendaConfirmar = c('#telaBotton');
-let noPermitido = c('#noPermitido')
-
+let noPermitido = c('#noPermitido');
+let noPermitidoAviso = c('#noPermitidoAviso span');
+let containerMostrarCandidatos = c('#containerMostrarCandidatos');
 
 let resultadoNaTela = c('footer div');
+let iconMostrarCandidatos = c('.material-symbols-outlined');
+
 //Cadastro de Informações Utilizadas
 let cadastroCandidatos = [
     {
-        titulo: 'LAVADOR DE LOUÇA',
+        titulo: 'LAVAR A LOUÇA',
+        branco: 0,
         qnumeros: 2,
         candidatos: [
             {
@@ -35,6 +39,7 @@ let cadastroCandidatos = [
                 partido: 'DosProgramadores',
                 foto: 'quilion.jpg', 
                 legenda: 'QuiLindo',
+                votado: 0
             },
             {
                 numero: '19',
@@ -42,6 +47,7 @@ let cadastroCandidatos = [
                 partido: 'DasGrávidas',
                 foto:'bruna.jpg', 
                 legenda: 'Bruna Linda',
+                votado: 0
             },
             {
                 numero: '02',
@@ -49,6 +55,7 @@ let cadastroCandidatos = [
                 partido: 'DosFotógrafos',
                 foto: 'richarle.jpg', 
                 legenda: 'RQ',
+                votado: 0
             },
             {
                 numero: '15',
@@ -56,6 +63,7 @@ let cadastroCandidatos = [
                 partido: 'DasProfessoras',
                 foto: 'quileana.jpg', 
                 legenda: 'Tia Qui',
+                votado: 0
             },
             {
                 numero: '26',
@@ -63,6 +71,7 @@ let cadastroCandidatos = [
                 partido: 'DosOuvidores',
                 foto: 'quileabe.jpg', 
                 legenda: 'QuiOuve',
+                votado: 0
             },
             {
                 numero: '03',
@@ -70,6 +79,7 @@ let cadastroCandidatos = [
                 partido: 'DasGrávidas',
                 foto:'elifelete.jpg', 
                 legenda: 'Tia Eli',
+                votado: 0
             },
             {
                 numero: '10',
@@ -77,6 +87,7 @@ let cadastroCandidatos = [
                 partido: 'DosQuiCaminham',
                 foto: 'juscilane.jpg', 
                 legenda: 'Qui Caminha',
+                votado: 0
             },
             {
                 numero: '12',
@@ -84,11 +95,13 @@ let cadastroCandidatos = [
                 partido: 'DasCostureiras',
                 foto: 'neuma.jpg', 
                 legenda: 'Vovó Linda',
+                votado: 0
             },
         ]
     },
     {
-        titulo: 'SECADOR DE LOUÇA',
+        titulo: 'SECAR A LOUÇA',
+        branco: 0,
         qnumeros: 4,
         candidatos: [
             {
@@ -97,6 +110,7 @@ let cadastroCandidatos = [
                 partido: 'DasCrianças',
                 foto:'adrian.jpg',
                 legenda: 'Adrian',
+                votado: 0
             },
             {
                 numero: '1994',
@@ -112,6 +126,7 @@ let cadastroCandidatos = [
                 partido: 'DasGrávidas',
                 foto:'bruna.jpg', 
                 legenda: 'Bruna Linda',
+                votado: 0
             },
             {
                 numero: '1986',
@@ -119,6 +134,7 @@ let cadastroCandidatos = [
                 partido: 'DosFotógrafos',
                 foto: 'richarle.jpg', 
                 legenda: 'RQ',
+                votado: 0
             },
             {
                 numero: '1989',
@@ -126,6 +142,7 @@ let cadastroCandidatos = [
                 partido: 'DasProfessoras',
                 foto: 'quileana.jpg', 
                 legenda: 'Tia Qui',
+                votado: 0
             },
             {
                 numero: '1987',
@@ -133,6 +150,7 @@ let cadastroCandidatos = [
                 partido: 'DosOuvidores',
                 foto: 'quileabe.jpg', 
                 legenda: 'QuiOuve',
+                votado: 0
             },
             {
                 numero: '1990',
@@ -140,6 +158,7 @@ let cadastroCandidatos = [
                 partido: 'DasGrávidas',
                 foto:'elifelete.jpg', 
                 legenda: 'Tia Eli',
+                votado: 0
             },
             {
                 numero: '1964',
@@ -147,6 +166,7 @@ let cadastroCandidatos = [
                 partido: 'DosQuiCaminham',
                 foto: 'juscilane.jpg', 
                 legenda: 'Qui Caminha',
+                votado: 0
             },
             {
                 numero: '1965',
@@ -154,6 +174,7 @@ let cadastroCandidatos = [
                 partido: 'DasCostureiras',
                 foto: 'neuma.jpg', 
                 legenda: 'Vovó Linda',
+                votado: 0
             },
         ]
     }
@@ -163,23 +184,34 @@ let cadastroCandidatos = [
 let etapaAtual = 0;
 let numeroclicado = '';
 let votoBranco = true;
+let votos = [];
 let votosLavador = [];
 let votosSecador = [];
 
-let testecontadorVotosSecador = [
-    {voto: '1994'},
-    {voto: '1994'},
-    {voto: '1989'},
-    {voto: 'Branco'},
-    {voto: '1234'}
-]
-let testecontadorVotosLavador = [
-    {voto: '08'},
-    {voto: '08'},
-    {voto: '01'},
-    {voto: 'Branco'},
-    {voto: '00'}
-];
+
+function candidatosDisponiveis() {
+    containerMostrarCandidatos.innerHTML = '';
+    let etapa = cadastroCandidatos[etapaAtual];
+
+    etapa.candidatos.filter((item)=>{
+        if(item.numero !== '') {
+            containerMostrarCandidatos.innerHTML += `<div class="dadosCandidato">
+            <img src="./images/${item.foto}">
+            <div class="dadosCandidatoNumber">Número: ${item.numero}</div>
+            <div class="dadosCandidatoName">${item.nome}</div></div>`;
+        }
+    })    
+}
+
+function mostrandoCandidatos() {
+    if(containerMostrarCandidatos.style.display !== 'flex') {
+        containerMostrarCandidatos.style.display = 'flex';
+        iconMostrarCandidatos.innerHTML = 'expand_less';
+    }else {
+        containerMostrarCandidatos.style.display = 'none';
+        iconMostrarCandidatos.innerHTML = 'expand_more';
+    }
+}
 
 function comecandoEtapas() {
     let etapa = cadastroCandidatos[etapaAtual];
@@ -260,7 +292,10 @@ function branco() {
 }
 
 function fechar() {
-    noPermitido.style.display = 'none';
+    noPermitidoAviso.innerHTML = `Para votar em BRANCO o campo de voto deve estar vazio.<br> Aperte CORRIGE para apagar o campo de voto.`;
+    if(noPermitido.style.display !== 'none') {
+        noPermitido.style.display = 'none';
+    }
 }
 
 function corrige() {
@@ -271,27 +306,31 @@ function confirma() {
     let etapa = cadastroCandidatos[etapaAtual];
     let votoConfirmado = false;
 
-    if(votoBranco === true) {
-        if(cadastroCandidatos[etapaAtual].titulo === 'LAVADOR DE LOUÇA') {
-            votosLavador.push({voto: 'Branco'});
-        } else if(cadastroCandidatos[etapaAtual].titulo === 'SECADOR DE LOUÇA') {
-            votosSecador.push({voto: 'Branco'});
+    let verificandoCandidato = etapa.candidatos.filter((item)=>{
+        if(item.numero === numeroclicado) {
+            item.votado++;
+            votoConfirmado = true;
+            return true;
+        }else {
+            return false;
         }
-        votoConfirmado = true;
-        
-    }else if(numeroclicado.length === etapa.qnumeros) {
-        if(cadastroCandidatos[etapaAtual].titulo === 'LAVADOR DE LOUÇA') {
-            votosLavador.push({voto: numeroclicado});
-        } else if(cadastroCandidatos[etapaAtual].titulo === 'SECADOR DE LOUÇA') {
-            votosSecador.push({voto: numeroclicado});
+    });
+
+    if(verificandoCandidato == false) {
+        if(votoBranco == true) {
+            etapa.branco++;
+            votoConfirmado = true;
+        }else if(numeroclicado.length === etapa.qnumeros) {
+            votos.push(numeroclicado);
+            votoConfirmado = true;
         }
-        votoConfirmado = true;
     }
 
-    if(votoConfirmado) {
+    if(votoConfirmado === true) {
         etapaAtual++;
         if(cadastroCandidatos[etapaAtual] !== undefined) {
             comecandoEtapas();
+            candidatosDisponiveis();
         }else {
             let tela = c('#tela');
             let fim = c('#fim');
@@ -305,60 +344,26 @@ function novoVoto() {
     etapaAtual = 0;
     tela.style.display = 'flex';
     fim.style.display = 'none';
-    comecandoEtapas() 
+    comecandoEtapas();
+    candidatosDisponiveis();
 }
 
-function qntVotos () { 
-   //Para saber quantos votos foram feitos
-   let qntVotosLav = 0;
-   let qntVotosSec = 0;
-   votos.map((item)=>{
-    if(item.etapa === 'LAVADOR DE LOUÇA') {
-        qntVotosLav++;
-    }else if(item.etapa === 'SECADOR DE LOUÇA') {
-        qntVotosSec++;
-    }
-   });
-   resultadoNaTela.innerHTML = `Etapa: LAVADOR DE LOUÇA <br> Quantidade de Votos: ${qntVotosLav}<br>Etapa: SECADOR DE LOUÇA <br> Quantidade de Votos: ${qntVotosSec}`;
-}
+function mostrarResultado() {
+    noPermitido.style.display = 'flex';
+    noPermitidoAviso.innerHTML = '';
 
-function contadorResultado() {
-    let contandoVotosLavador = votosLavador.reduce((accumulator, { voto }) => {
-        accumulator[voto] = accumulator[voto] + 1 || 1
-        return accumulator
-    }, {})
-    let contandoVotosSecador = votosSecador.reduce((accumulator, { voto }) => {
-        accumulator[voto] = accumulator[voto] + 1 || 1
-        return accumulator
-    }, {})
-    console.log(contandoVotosLavador);
-    console.log(contandoVotosSecador);
-}
-
-function resultado() {
-    /*
-    Procurando com for
-    for(let i in testecontadorVotosLavador) {
-        if(testecontadorVotosLavador[i].voto === 'Branco'){
-            console.log('deu aqui')
-        }
-    }
-    */
-   // Procurando com filter
-    testecontadorVotosLavador.filter(item => {
-        if(item.voto === 'Branco') {
-            console.log('deu bom aqui')
-        }
-    })
-   
-
-    /*cadastroCandidatos.filter(item => {
-        item.candidatos.filter(item => {
-            console.log(item.numero)
+    cadastroCandidatos.filter((etapa)=>{
+        etapa.candidatos.filter((item)=>{
+            if(item.votado != 0) {
+                noPermitidoAviso.innerHTML += `<div class="dadosCandidato">
+                <div class="dadosCandidatoNumber">${etapa.titulo}</div>
+                <img src="./images/${item.foto}">
+                <div class="dadosCandidatoNumber">Votos: ${item.votado}</div>
+                <div class="dadosCandidatoName">${item.nome}</div></div>`;
+            }
         })
-    })*/
-    console.log(testecontadorVotosLavador);
-    console.log(testecontadorVotosSecador);
+    })
 }
 
 comecandoEtapas() 
+candidatosDisponiveis ()
